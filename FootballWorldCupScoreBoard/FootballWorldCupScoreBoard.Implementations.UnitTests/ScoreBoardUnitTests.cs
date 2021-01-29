@@ -120,7 +120,6 @@ namespace FootballWorldCupScoreBoard.Implementations.UnitTests
             action.Should().Throw<ArgumentNullException>();
         }
 
-
         [Theory]
         [InlineData(null, 1, 1)]
         [InlineData(2, null, 2)]
@@ -148,12 +147,16 @@ namespace FootballWorldCupScoreBoard.Implementations.UnitTests
 
             Assert.Equal(expected, matchUpdated.Score.TotalScore);
         }
-
         #endregion
 
         #region GetMatchesSummary
-        [Fact]
-        public void GetMatchesSummary_ScoreBoardMatchesReturnMatchesOrdered_WhenSummaryIsDemanded()
+        [Theory]
+        [InlineData(4, 0)]
+        [InlineData(1, 1)]
+        [InlineData(3, 2)]
+        [InlineData(2, 3)]
+        [InlineData(5, 4)]
+        public void GetMatchesSummary_ScoreBoardMatchesReturnMatchesOrdered_WhenSummaryIsDemanded(int matchId, int expected)
         {
             var scoreBoard = new ScoreBoard
             {
@@ -162,6 +165,9 @@ namespace FootballWorldCupScoreBoard.Implementations.UnitTests
 
             var result = scoreBoard.GetMatchesSummary();
 
+            var matchOrderedIndex = result.IndexOf(result.Where(c => c.Id.Equals(matchId)).SingleOrDefault());
+
+            Assert.Equal(expected, matchOrderedIndex);
         }
         #endregion
 
@@ -199,7 +205,7 @@ namespace FootballWorldCupScoreBoard.Implementations.UnitTests
                 Id = 4,
                 HomeTeam = new Team { Name = "Bolton Wanderers" },
                 AwayTeam = new Team { Name = "Tottenham Hotspur" },
-                Score = new Score { HomeScore = 1, AwayScore = 1 }
+                Score = new Score { HomeScore = 1, AwayScore = 4 }
             };
 
             var matchE = new Models.Match
@@ -219,8 +225,5 @@ namespace FootballWorldCupScoreBoard.Implementations.UnitTests
             return matches;
         }
         #endregion
-
-
-
     }
 }

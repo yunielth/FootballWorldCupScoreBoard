@@ -6,6 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3"/>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Moq" Version="4.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FootballWorldCupScoreBoard.Implementations\FootballWorldCupScoreBoard.Implementations.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,6 @@ namespace FootballWorldCupScoreBoard.Implementations.Models
 {
     public class Team
     {
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 }
